@@ -20,3 +20,20 @@ class Solution:
         # The final result is the maximum profit achievable
         # considering all the houses in the given list
         return next
+
+
+# Recursion + Memoization Approach
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        cache = {}
+
+        def helper(i):
+            if i < 0:
+                return 0
+            if i not in cache:
+                next = nums[i] + helper(i - 2)
+                prev = helper(i - 1)
+                cache[i] = max(prev, next)
+            return cache[i]
+
+        return helper(len(nums) - 1) 
